@@ -16,12 +16,15 @@ I love building **end-to-end ML systems**, experimenting with **deep learning ar
 
 - 🥐 **Bakery Sales Prediction** – End-to-end time series pipeline for forecasting daily bakery item demand to reduce waste and optimize production.  
   🔗 [Repository: bakery_prediction](https://github.com/de-Lulu/bakery_prediction)
-
+  
 - 🔭 **CLUE** – Contextual Learning Unified Engine  
+ 🔗 [Repository: CLUE](https://github.com/Aadip-Thapaliya/CLUE_PROTOTYPE)
 
-- ⚡ **EATSP** – Energy Advanced Time Series Prediction  
+- ⚡ **EATSP** – Energy Advanced Time Series Prediction
+ 🔗 [Repository:Energy Advanced Time Series Prediction](https://github.com/Aadip-Thapaliya/EATSP-Energy-Advance-Time-Series-Prediction)
 
-- 👁️ **Valeo Machine Vision Challenge (Collaboration)**  
+- 👁️ **Valeo Machine Vision Challenge (Collaboration)**
+ 🔗 [Repository: Valeo Machine Vision Challenge](https://github.com/Sl4artiB4rtF4rst/MachineVision_Valeo_ChallangeData)
 
 ---
 
