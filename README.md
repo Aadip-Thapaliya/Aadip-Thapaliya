@@ -3,6 +3,20 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=aadip-thapaliya" alt="aadip-thapaliya" /></a> </p>
 
+- 🔭 I’m currently working on [CLUE](https://github.com/Aadip-Thapaliya/CLUE_PROTOTYPE)
+
+- 👯 I’m working on [EATSP-Energy-Advance-Time-Series-Prediction](https://github.com/Aadip-Thapaliya/EATSP-Energy-Advance-Time-Series-Prediction)
+
+- 👯 I’m also working on [MachineVision_Valeo_ChallangeData](https://github.com/Sl4artiB4rtF4rst/MachineVision_Valeo_ChallangeData/tree/main)
+
+- 👨‍💻 All of my projects are available at [https://github.com/Aadip-Thapaliya](https://github.com/Aadip-Thapaliya)
+
+- 🌱 I’m currently learning **COMPUTER VISION , CNN , ANN, RNN,TRANSFORMERS ,FLASK**
+
+- 📫 How to reach me **aadipthapaliya@gmail.com**
+
+- 📄 Know about my experiences [Lebenslauf von Aadip Thapaliya.pdf](Lebenslauf von Aadip Thapaliya.pdf)
+
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://linkedin.com/in/https://www.linkedin.com/in/aadipthapaliya/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://www.linkedin.com/in/aadipthapaliya/" height="30" width="40" /></a>
