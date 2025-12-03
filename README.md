@@ -48,23 +48,19 @@ Passionate about AI for financial systems, anomaly detection, and real-world ris
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg" width="40"/>
   <img src="https://www.vectorlogo.zone/logos/opencv/opencv-icon.svg" width="40"/>
   <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" width="40"/>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" width="40"/>
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" width="40"/>
-  <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" width="40"/>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" width="40"/>
   <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" width="40"/>
+  <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" width="40"/>
 </p>
 
 ---
 
 ### 📊 GitHub Stats
-<p>
-  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=aadip-thapaliya&layout=compact" />
-</p>
 
-<p>
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=aadip-thapaliya&show_icons=true" />
-</p>
+![Top Langs](https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=aadip-thapaliya&layout=compact)
 
-<p>
-  <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=aadip-thapaliya" />
-</p>
+![Aadip's GitHub stats](https://github-readme-stats-sigma-five.vercel.app/api?username=aadip-thapaliya&show_icons=true)
+
+![GitHub Streak](https://streak-stats.demolab.com?user=aadip-thapaliya&)
+
