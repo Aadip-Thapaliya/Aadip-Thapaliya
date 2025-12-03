@@ -18,13 +18,14 @@ I love building **end-to-end ML systems**, experimenting with **deep learning ar
   🔗 [Repository: bakery_prediction](https://github.com/de-Lulu/bakery_prediction)
   
 - 🔭 **CLUE** – Contextual Learning Unified Engine  
- 🔗 [Repository: CLUE](https://github.com/Aadip-Thapaliya/CLUE_PROTOTYPE)
+  🔗 [Repository: CLUE](https://github.com/Aadip-Thapaliya/CLUE_PROTOTYPE)
 
-- ⚡ **EATSP** – Energy Advanced Time Series Prediction
- 🔗 [Repository:Energy Advanced Time Series Prediction](https://github.com/Aadip-Thapaliya/EATSP-Energy-Advance-Time-Series-Prediction)
+- ⚡ **EATSP** – Energy Advanced Time Series Prediction  
+  🔗 [Repository: Energy Advanced Time Series Prediction](https://github.com/Aadip-Thapaliya/EATSP-Energy-Advance-Time-Series-Prediction)
 
-- 👁️ **Valeo Machine Vision Challenge (Collaboration)**
- 🔗 [Repository: Valeo Machine Vision Challenge](https://github.com/Sl4artiB4rtF4rst/MachineVision_Valeo_ChallangeData)
+- 👁️ **Valeo Machine Vision Challenge (Collaboration)**  
+  🔗 [Repository: Valeo Machine Vision Challenge](https://github.com/Sl4artiB4rtF4rst/MachineVision_Valeo_ChallangeData)
+
 
 ---
 
