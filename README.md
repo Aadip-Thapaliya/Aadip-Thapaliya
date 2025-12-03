@@ -1,4 +1,4 @@
-<h1 align="center">Hi , I'm Aadip Thapaliya</h1>
+<h1 align="center">Hi 👋, I'm Aadip Thapaliya</h1>
 <h3 align="center">Data Science student specializing in machine learning, time-series modelling, and automated analytical workflows. Experienced with Python, deep learning frameworks, and building end-to-end ML pipelines. Passionate about applying AI to financial systems, anomaly detection, and real-world risk prediction. Strong track record of delivering reproducible models, working on research-driven projects, and collaborating with cross-functional teams.</h3>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=aadip-thapaliya" alt="aadip-thapaliya" /></a> </p>
@@ -15,7 +15,7 @@
 
 - 📫 How to reach me **aadipthapaliya@gmail.com**
 
-- 📄 Know about my experiences [Lebenslauf von Aadip Thapaliya.pdf](Lebenslauf von Aadip Thapaliya.pdf)
+- 📄 Know about my experiences [https://github.com/Aadip-Thapaliya/Aadip-Thapaliya/blob/main/Lebenslauf%20von%20Aadip%20Thapaliya.pdf](https://github.com/Aadip-Thapaliya/Aadip-Thapaliya/blob/main/Lebenslauf%20von%20Aadip%20Thapaliya.pdf)
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
