@@ -37,7 +37,7 @@ I love building **end-to-end ML systems**, experimenting with **deep learning ar
 ---
 
 ## 📄 Resume  
-📄 [View My Resume]([.aadip thapaliya final cv .pdf](https://github.com/Aadip-Thapaliya/Aadip-Thapaliya/blob/main/aadipthapaliya%20final%20cv.pdf))
+📄 [.aadip thapaliya final cv .pdf](https://github.com/Aadip-Thapaliya/Aadip-Thapaliya/blob/main/aadipthapaliya%20final%20cv.pdf)
 
 ---
 
