@@ -5,7 +5,7 @@
     <a href="https://linkedin.com/in/aadipthapaliya" target="_blank">
       <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
     </a>
-    <a href="mailto:aadip.thapaliya@example.com">
+    <a href="mailto:aadipthapaliya@gmail.com">
       <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
     </a>
     <a href="https://github.com/Aadip-Thapaliya" target="_blank">
@@ -128,7 +128,7 @@ I am passionate about building **end-to-end ML systems**, experimenting with **c
   <a href="https://linkedin.com/in/aadipthapaliya" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
   </a>
-  <a href="mailto:aadip.thapaliya@example.com">
+  <a href="mailto:aadipthapaliya@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
   </a>
   <a href="https://github.com/Aadip-Thapaliya" target="_blank">
