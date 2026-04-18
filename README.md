@@ -7,28 +7,28 @@
 ---
 
 ## 🌌 About Me
-I am a **Data Science student** and **Machine Learning/AI Developer**, with a strong focus on **Causal Inference, Reinforcement Learning, Large Language Models (LLMs), and Environmental Sensing**. Over the past 6 months, I’ve been deeply involved in projects that bridge theory and real-world applications, from **AI agents to deep RL and environmental data analysis**.
+I am a **Data Science student** and **Machine Learning/AI Developer**, with a strong focus on **Causal Inference, Reinforcement Learning, Large Language Models (LLMs), and Environmental Sensing**. Over the next 6 months, I will be deeply involved in projects that bridge theory and real-world applications, from **AI agents to deep RL and environmental data analysis**.
 
-I love building **end-to-end ML systems**, experimenting with **cutting-edge deep learning architectures**, and solving **challenging analytical problems**.
+I am passionate about building **end-to-end ML systems**, experimenting with **cutting-edge deep learning architectures**, and solving **challenging analytical problems**.
 
 ---
 
-## 🚀 Recent Contributions (Last 6 Months)
+## 🚀 Upcoming Projects (Next 6 Months)
 
 ### 🔗 **Causal Inference and ML**
-- Focused on causal discovery and machine learning techniques for real-world data analysis.
+- Will focus on causal discovery and machine learning techniques for real-world data analysis.
 - [Repository: Causal Inference and ML](https://github.com/Aadip-Thapaliya/Causal-Inference-and-ML)
 
 ### 🔗 **LLMs to AI Agents**
-- Explored the transformation of Large Language Models into autonomous AI agents for practical applications.
+- Will explore the transformation of Large Language Models into autonomous AI agents for practical applications.
 - [Repository: LLMs to AI Agents](https://github.com/Aadip-Thapaliya/LLMs-to-AI-Agents)
 
 ### 🔗 **Deep Reinforcement Learning**
-- Developed and experimented with deep reinforcement learning algorithms for complex decision-making tasks.
+- Will develop and experiment with deep reinforcement learning algorithms for complex decision-making tasks.
 - [Repository: Deep Reinforcement Learning](https://github.com/Aadip-Thapaliya/Deep-Reinforcement-Learning)
 
 ### 🔗 **Environmental Sensing**
-- Worked on projects related to environmental data collection, analysis, and predictive modeling using ML.
+- Will work on projects related to environmental data collection, analysis, and predictive modeling using ML.
 - [Repository: Environmental Sensing](https://github.com/Aadip-Thapaliya/Environmental-Sensing)
 
 ---
