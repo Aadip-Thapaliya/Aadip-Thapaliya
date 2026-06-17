@@ -39,34 +39,6 @@ I am passionate about building **end-to-end ML systems**, experimenting with **c
 </p>
 - Focused on **causal discovery** and **machine learning techniques** for real-world data analysis.
 - [Repository](https://github.com/Aadip-Thapaliya/Causal-Inference-and-ML)
-
-### 🔗 **LLMs to AI Agents**
-<p>
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/github/stars/Aadip-Thapaliya/LLMs-to-AI-Agents?style=for-the-badge" alt="Stars">
-  <img src="https://img.shields.io/github/forks/Aadip-Thapaliya/LLMs-to-AI-Agents?style=for-the-badge" alt="Forks">
-</p>
-- Exploring the transformation of **Large Language Models** into **autonomous AI agents** for practical applications.
-- [Repository](https://github.com/Aadip-Thapaliya/LLMs-to-AI-Agents)
-
-### 🔗 **Deep Reinforcement Learning**
-<p>
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/github/stars/Aadip-Thapaliya/Deep-Reinforcement-Learning?style=for-the-badge" alt="Stars">
-  <img src="https://img.shields.io/github/forks/Aadip-Thapaliya/Deep-Reinforcement-Learning?style=for-the-badge" alt="Forks">
-</p>
-- Developing and experimenting with **deep reinforcement learning algorithms** for complex decision-making tasks.
-- [Repository](https://github.com/Aadip-Thapaliya/Deep-Reinforcement-Learning)
-
-### 🔗 **Environmental Sensing**
-<p>
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/github/stars/Aadip-Thapaliya/Environmental-Sensing?style=for-the-badge" alt="Stars">
-  <img src="https://img.shields.io/github/forks/Aadip-Thapaliya/Environmental-Sensing?style=for-the-badge" alt="Forks">
-</p>
-- Working on projects related to **environmental data collection, analysis, and predictive modeling** using ML.
-- [Repository](https://github.com/Aadip-Thapaliya/Environmental-Sensing)
-
 ---
 
 ## 🧠 What I'm Learning
