@@ -26,24 +26,37 @@
 
 <!-- ===== QUICK PROFILE ===== -->
 
-## About Me
+About Me
 
 I am a Digital Business and Data Science student based in Berlin/Potsdam, focused on machine learning, causal inference, time series forecasting, and practical data products. I like building systems that connect research ideas with useful workflows: automated reporting, forecasting pipelines, causal estimation, and AI-assisted analysis.
 
 Currently, I am working on causal inference, financial and energy time series forecasting, machine learning pipelines, and AI agent ideas.
 
-## Current Focus
+Current Focus
 
-| Area | What I am building or studying |
-| --- | --- |
-| Causal Inference | IPW, AIPW, meta-learners, sensitivity analysis, treatment effect estimation |
-| Time Series Forecasting | ARIMA, GARCH, LightGBM, Prophet, LSTM, N-BEATS, benchmarking workflows |
-| ML Engineering | Python pipelines, automated reports, model evaluation, reproducible notebooks |
-| AI Systems | LLM agents, reinforcement learning, end-to-end analytical tools |
+Area
+
+What I am building or studying
+
+Causal Inference
+
+IPW, AIPW, meta-learners, sensitivity analysis, treatment effect estimation
+
+Time Series Forecasting
+
+ARIMA, GARCH, LightGBM, Prophet, LSTM, N-BEATS, benchmarking workflows
+
+ML Engineering
+
+Python pipelines, automated reports, model evaluation, reproducible notebooks
+
+AI Systems
+
+LLM agents, reinforcement learning, end-to-end analytical tools
 
 <!-- ===== TECH STACK ===== -->
 
-## Tech Stack
+Tech Stack
 
 <div align="center">
 
@@ -67,18 +80,31 @@ Currently, I am working on causal inference, financial and energy time series fo
   <img width="100%" src="https://raw.githubusercontent.com/Aadip-Thapaliya/Aadip-Thapaliya/main/assets/projects.svg" alt="Selected projects" />
 </div>
 
-## Selected Projects
+Selected Projects
 
-| Project | What it shows |
-| --- | --- |
-| [Causal Inference and ML](https://github.com/Aadip-Thapaliya/Causal-Inference-and-ML) | Causal discovery, treatment effect estimation, IPW/AIPW/meta-learners, sensitivity analysis |
-| CLUE Automated Forecasting Pipeline | Automated cleaning, forecasting, dashboarding, and PDF reporting for non-technical users |
-| Financial Time Series Benchmark | 10+ models across equities, including ARIMA, GARCH, LightGBM, LSTM, N-BEATS, Prophet |
-| Varun Herbal ML Reporting | Automated Python reporting pipeline, crop risk classifier, operational risk reports |
+Project
+
+What it shows
+
+Causal Inference and ML
+
+Causal discovery, treatment effect estimation, IPW/AIPW/meta-learners, sensitivity analysis
+
+CLUE Automated Forecasting Pipeline
+
+Automated cleaning, forecasting, dashboarding, and PDF reporting for non-technical users
+
+Financial Time Series Benchmark
+
+10+ models across equities, including ARIMA, GARCH, LightGBM, LSTM, N-BEATS, Prophet
+
+Varun Herbal ML Reporting
+
+Automated Python reporting pipeline, crop risk classifier, operational risk reports
 
 <!-- ===== GITHUB STATS ===== -->
 
-## GitHub Analytics
+GitHub Analytics
 
 <div align="center">
 
@@ -102,7 +128,7 @@ Currently, I am working on causal inference, financial and energy time series fo
 
 <!-- ===== CONTRIBUTION SNAKE ===== -->
 
-## Contribution Graph
+Contribution Graph
 
 <div align="center">
 
@@ -116,7 +142,7 @@ Currently, I am working on causal inference, financial and energy time series fo
 
 <!-- ===== ACTIVITY GRAPH ===== -->
 
-## Activity
+Activity
 
 <div align="center">
 
@@ -129,7 +155,7 @@ Currently, I am working on causal inference, financial and energy time series fo
 
 <!-- ===== RESUME ===== -->
 
-## Resume
+Resume
 
 <div align="center">
 
@@ -141,7 +167,7 @@ Currently, I am working on causal inference, financial and energy time series fo
 
 <!-- ===== CONNECT ===== -->
 
-## Connect
+Connect
 
 <div align="center">
 
