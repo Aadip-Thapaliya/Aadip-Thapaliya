@@ -1,0 +1,61 @@
+<svg width="1200" height="500" viewBox="0 0 1200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A101F"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="60" y1="56" x2="1140" y2="444" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="0.5" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+    <style>
+      .title { fill: #F8FAFC; font-family: Inter, Segoe UI, Arial, sans-serif; font-weight: 800; }
+      .heading { fill: #22D3EE; font-family: Inter, Segoe UI, Arial, sans-serif; font-weight: 700; }
+      .body { fill: #CBD5E1; font-family: Inter, Segoe UI, Arial, sans-serif; }
+      .tag { fill: #94A3B8; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+      .card { animation: rise 4s ease-in-out infinite; }
+      .card2 { animation-delay: .5s; }
+      .card3 { animation-delay: 1s; }
+      .card4 { animation-delay: 1.5s; }
+      @keyframes rise { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    </style>
+  </defs>
+
+  <rect width="1200" height="500" rx="18" fill="url(#bg)"/>
+  <rect x="28" y="28" width="1144" height="444" rx="18" stroke="url(#accent)" stroke-width="2"/>
+  <text class="title" x="60" y="86" font-size="34">Selected Work</text>
+  <text class="body" x="60" y="121" font-size="18">Research-minded machine learning projects with practical data product delivery.</text>
+
+  <g class="card" transform="translate(60 160)">
+    <rect width="520" height="118" rx="14" fill="#0F172A" stroke="#1E3A5F"/>
+    <circle cx="42" cy="42" r="18" fill="#22D3EE" opacity="0.16"/>
+    <text class="heading" x="76" y="44" font-size="21">Causal Inference and ML</text>
+    <text class="body" x="28" y="75" font-size="15">IPW, AIPW, meta-learners, sensitivity analysis, treatment effects.</text>
+    <text class="tag" x="28" y="101" font-size="13">causal-discovery | policy-analysis | python</text>
+  </g>
+
+  <g class="card card2" transform="translate(620 160)">
+    <rect width="520" height="118" rx="14" fill="#0F172A" stroke="#2D2360"/>
+    <circle cx="42" cy="42" r="18" fill="#A78BFA" opacity="0.16"/>
+    <text class="heading" x="76" y="44" font-size="21" fill="#A78BFA">CLUE Forecasting Pipeline</text>
+    <text class="body" x="28" y="75" font-size="15">Automated cleaning, forecasting, dashboards, and PDF reports.</text>
+    <text class="tag" x="28" y="101" font-size="13">automation | forecasting | reporting</text>
+  </g>
+
+  <g class="card card3" transform="translate(60 314)">
+    <rect width="520" height="118" rx="14" fill="#0F172A" stroke="#2B4A3E"/>
+    <circle cx="42" cy="42" r="18" fill="#10B981" opacity="0.16"/>
+    <text class="heading" x="76" y="44" font-size="21" fill="#10B981">Financial Time Series Benchmark</text>
+    <text class="body" x="28" y="75" font-size="15">10+ forecasting models across equities with statistical and ML baselines.</text>
+    <text class="tag" x="28" y="101" font-size="13">arima | garch | lightgbm | lstm | prophet</text>
+  </g>
+
+  <g class="card card4" transform="translate(620 314)">
+    <rect width="520" height="118" rx="14" fill="#0F172A" stroke="#1E3A5F"/>
+    <circle cx="42" cy="42" r="18" fill="#22D3EE" opacity="0.16"/>
+    <text class="heading" x="76" y="44" font-size="21">Varun Herbal ML Reporting</text>
+    <text class="body" x="28" y="75" font-size="15">Daily ingestion, risk classification, and automated decision reports.</text>
+    <text class="tag" x="28" y="101" font-size="13">python | classification | operational-analytics</text>
+  </g>
+</svg>
