@@ -3,20 +3,12 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Aadip-Thapaliya/Aadip-Thapaliya/main/assets/dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Aadip-Thapaliya/Aadip-Thapaliya/main/assets/light.svg">
-  <img width="100%" alt="Aadip Thapaliya - Data Science and Machine Learning Portfolio" src="https://raw.githubusercontent.com/Aadip-Thapaliya/Aadip-Thapaliya/main/assets/light.svg">
-</picture>
-
-<!-- ===== PROFILE PHOTO ===== -->
-
-<div align="center">
   <img
-    src="https://raw.githubusercontent.com/Aadip-Thapaliya/Aadip-Thapaliya/main/assets/photo.svg"
-    alt="Aadip Thapaliya"
-    width="240"
-  />
-</div>
-
-<br/>
+    width="100%"
+    alt="Aadip Thapaliya - Data Science and Machine Learning Portfolio"
+    src="https://raw.githubusercontent.com/Aadip-Thapaliya/Aadip-Thapaliya/main/assets/light.svg"
+  >
+</picture>
 
 <div align="center">
 
