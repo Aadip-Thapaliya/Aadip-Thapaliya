@@ -7,6 +7,9 @@ Run locally:   python scripts/render_readme_cards.py
 In CI:         .github/workflows/update-profile-art.yml runs it daily.
 
 Uses only the Python standard library. Set GITHUB_TOKEN to raise the API limit.
+
+Font sizes are large on purpose: GitHub shows a 1200px-wide card at roughly
+830px, so every size here is drawn at about 0.7x on screen.
 """
 
 from __future__ import annotations
@@ -31,10 +34,12 @@ PROFILE = {
     "greeting": "// hallo, ich bin",
     "name": "Aadip Thapaliya",
     "tagline": [
-        "Data Science student in Berlin. I forecast time series,",
-        "measure causal impact, and automate the reports in between.",
+        "Data Science student in Berlin.",
+        "I forecast time series, measure causal impact,",
+        "and automate the reports in between.",
     ],
-    "meta": "B.Sc. Digital Business & Data Science @ UE Potsdam  ·  ML programme @ opencampus.sh",
+    "meta": ["B.Sc. Digital Business & Data Science @ UE Potsdam",
+             "ML Study Programme @ opencampus.sh (CAU Kiel)"],
     "location": "Berlin, DE",
     "skills": ["Python", "SQL", "R", "PyTorch", "TensorFlow", "scikit-learn",
                "PostgreSQL", "Power BI", "Causal Inference"],
@@ -62,11 +67,47 @@ REPOS = [
              "the open-source, plugin-first agent harness."},
 ]
 
+JOURNEY = [
+    {"when": "now", "title": "Machine Learning Study Programme", "org": "opencampus.sh · CAU Kiel",
+     "detail": "Deep learning, time series and scientific ML, alongside my degree", "live": True},
+    {"when": "2025", "title": "Machine Learning Research Intern",
+     "org": "Varun Herbal Pvt. Ltd. · Remote · Jan – Jul 2025",
+     "detail": "Daily Python pipeline cut manual effort 40% · risk classifier: 90% accuracy, 10k+ samples"},
+    {"when": "2024–27", "title": "B.Sc. Digital Business & Data Science",
+     "org": "University of Europe for Applied Sciences · Potsdam",
+     "detail": "Focus: forecasting, causal inference and automated reporting"},
+    {"when": "certs", "title": "3 certificates", "org": "opencampus.sh",
+     "detail": "ML with TensorFlow · Advanced Time Series Forecasting · Scientific ML"},
+]
+
+TOOLBOX = [
+    ("LANGUAGES", ["Python", "SQL", "R"]),
+    ("MACHINE LEARNING", ["PyTorch", "TensorFlow", "scikit-learn", "LightGBM", "XGBoost"]),
+    ("DATA", ["Pandas", "NumPy", "PostgreSQL"]),
+    ("VISUALISE", ["Power BI", "Matplotlib", "Excel"]),
+    ("METHODS", ["Time Series Forecasting", "Causal Inference", "Survey Analysis", "Automated Reporting"]),
+]
+SPOKEN = [("English", "C1", 4.5), ("German", "A2", 2)]
+
+CONNECT = [
+    {"file": "portfolio", "label": "PORTFOLIO", "title": "Portfolio", "sub": "projects & case studies", "icon": "globe"},
+    {"file": "linkedin", "label": "LINKEDIN", "title": "LinkedIn", "sub": "in/aadipthapaliya", "icon": "in"},
+    {"file": "email", "label": "EMAIL", "title": "Email", "sub": "aadipthapaliya@gmail.com", "icon": "mail"},
+    {"file": "resume", "label": "RESUME", "title": "Resume", "sub": "Lebenslauf · PDF", "icon": "doc"},
+]
+
+TITLES = {
+    "building": ("~/projects $ ls --active", "What I'm building"),
+    "journey": ("~ $ cat journey.log", "Where I've been"),
+    "toolbox": ("~ $ pip list --user", "Toolbox"),
+    "connect": ("~ $ ping aadip", "Let's talk"),
+}
+
 # ------------------------------------------------------------------- theme --
 
 C = {
     "bg": "#0e1a2f", "bg2": "#15243e", "line": "#24365a",
-    "cream": "#f3e9d2", "muted": "#9fb0c9", "dim": "#5f7392",
+    "cream": "#f3e9d2", "muted": "#a9b8cf", "dim": "#6b7f9e",
     "orange": "#f0803c", "amber": "#e3a24f", "teal": "#5fb3a6", "green": "#8fb36b",
 }
 LEVELS = ["#1a2945", "#2c5c63", "#4f9c93", "#e3a24f", "#f2733a"]
@@ -83,6 +124,8 @@ BASE_CSS = f"""
 @keyframes draw{{to{{stroke-dashoffset:0}}}}
 @keyframes blink{{50%{{opacity:0}}}}
 @keyframes pulse{{0%,100%{{opacity:1}}50%{{opacity:.35}}}}
+@keyframes nudge{{0%,100%{{transform:translate(0,0)}}50%{{transform:translate(4px,-4px)}}}}
+@keyframes steam{{0%{{opacity:0;transform:translateY(6px)}}40%{{opacity:.7}}100%{{opacity:0;transform:translateY(-18px)}}}}
 .fade{{animation:fade .8s ease-out both}}
 .rise{{animation:rise .8s ease-out both}}
 """
@@ -121,9 +164,23 @@ def panel(w: int, h: int, pad: int = 6) -> str:
     """Card background with the 'margin' baked in, so cards tile with no gaps."""
     return (f'<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">'
             f'<stop offset="0" stop-color="{C["bg2"]}"/><stop offset="1" stop-color="{C["bg"]}"/>'
-            f'</linearGradient></defs>'
+            f'</linearGradient><clipPath id="card"><rect x="{pad}" y="{pad}" width="{w - 2 * pad}" '
+            f'height="{h - 2 * pad}" rx="16"/></clipPath></defs>'
             f'<rect x="{pad}" y="{pad}" width="{w - 2 * pad}" height="{h - 2 * pad}" rx="16" '
             f'fill="url(#pg)" stroke="{C["line"]}"/>')
+
+
+def prompt(x: int, y: int, s: str, size: int = 17) -> str:
+    return f'<text x="{x}" y="{y}" class="mono" font-size="{size}" fill="{C["orange"]}">{esc(s)}</text>'
+
+
+def chip(x: float, y: float, s: str, size: int = 16, delay: float = 0, h: int = 36) -> tuple[str, float]:
+    cw = text_w(s, size, mono=True) + 28
+    out = (f'<g class="rise" style="animation-delay:{delay:.2f}s">'
+           f'<rect x="{x:.0f}" y="{y}" width="{cw:.0f}" height="{h}" rx="{h // 2}" fill="{C["bg"]}" '
+           f'stroke="{C["line"]}"/><text x="{x + cw / 2:.0f}" y="{y + h / 2 + size * .36:.0f}" '
+           f'text-anchor="middle" class="mono" font-size="{size}" fill="{C["cream"]}">{esc(s)}</text></g>')
+    return out, cw
 
 
 # -------------------------------------------------------------------- data --
@@ -170,16 +227,17 @@ def fetch_repo(spec: dict) -> dict:
     return info
 
 
-# ------------------------------------------------------------------- cards --
+# ------------------------------------------------------------- scenery ------
 
 LEAF = "M0,-7 C5,-4 5,4 0,8 C-5,4 -5,-4 0,-7 Z"
 
 
-def leaves(w: int, h: int) -> str:
+def leaves(h: int, xs=(140, 330, 520, 760, 980, 1110)) -> str:
     out = []
-    spec = [(140, 9, 0, C["orange"]), (520, 12, 3, C["amber"]), (760, 10, 6, C["orange"]),
-            (980, 14, 1.5, C["amber"]), (1110, 11, 4.5, C["green"]), (330, 13, 7.5, C["amber"])]
-    for x, dur, delay, col in spec:
+    durs = [9, 13, 12, 10, 14, 11]
+    delays = [0, 7.5, 3, 6, 1.5, 4.5]
+    cols = [C["orange"], C["amber"], C["amber"], C["orange"], C["amber"], C["green"]]
+    for x, dur, delay, col in zip(xs, durs, delays, cols):
         out.append(
             f'<g opacity="0"><animate attributeName="opacity" values="0;.55;.55;0" dur="{dur}s" '
             f'begin="{delay}s" repeatCount="indefinite"/>'
@@ -191,27 +249,8 @@ def leaves(w: int, h: int) -> str:
     return "".join(out)
 
 
-def hero() -> str:
-    W, H = 1200, 440
-    img = base64.b64encode((ROOT / "assets" / "avatar.jpg").read_bytes()).decode()
-    cx, cy, r = 214, 214, 150
-    p = PROFILE
-    tx = 418
-
-    chips, x, y = [], tx, 340
-    for i, s in enumerate(p["skills"]):
-        cw = text_w(s, 13, mono=True) + 24
-        if x + cw > W - 40:
-            x, y = tx, y + 38
-        chips.append(
-            f'<g class="rise" style="animation-delay:{1.6 + i * .08:.2f}s">'
-            f'<rect x="{x}" y="{y}" width="{cw:.0f}" height="28" rx="14" fill="{C["bg"]}" '
-            f'stroke="{C["line"]}"/><text x="{x + cw / 2:.0f}" y="{y + 19}" text-anchor="middle" '
-            f'class="mono" font-size="13" fill="{C["cream"]}">{esc(s)}</text></g>')
-        x += cw + 10
-
-    name_w = len(p["name"]) * 58 * 0.51 + 6  # measured for Segoe UI bold
-    hills = (
+def hills(H: int) -> str:
+    return (
         f'<path d="M6,{H - 70} C180,{H - 140} 320,{H - 90} 470,{H - 120} S800,{H - 160} 1000,{H - 105} '
         f'S1150,{H - 120} 1194,{H - 130} L1194,{H - 6} L6,{H - 6} Z" fill="{C["green"]}" opacity=".06"/>'
         f'<path d="M6,{H - 40} C220,{H - 90} 420,{H - 50} 640,{H - 75} S1000,{H - 95} 1194,{H - 60} '
@@ -220,38 +259,64 @@ def hero() -> str:
         f'stroke-width="2" opacity=".35" stroke-dasharray="14 10">'
         f'<animate attributeName="stroke-dashoffset" from="0" to="-48" dur="2.5s" repeatCount="indefinite"/></path>')
 
+
+# ------------------------------------------------------------------- cards --
+
+def hero() -> str:
+    W, H = 1200, 520
+    img = base64.b64encode((ROOT / "assets" / "avatar.jpg").read_bytes()).decode()
+    cx, cy, r = 226, 246, 170
+    p = PROFILE
+    tx = 452
+
+    chips, x, y = [], tx, 398
+    for i, s in enumerate(p["skills"]):
+        cw = text_w(s, 16, mono=True) + 28
+        if x + cw > W - 36:
+            x, y = tx, y + 46
+        c, cw = chip(x, y, s, 16, 1.6 + i * .08)
+        chips.append(c)
+        x += cw + 10
+
+    name_w = len(p["name"]) * 66 * 0.51 + 6  # measured for Segoe UI bold
+    steps = 16
+    vals = ";".join(str(int(name_w * k / steps)) for k in range(steps + 1))
+    keys = ";".join(f"{k / steps:.4f}" for k in range(steps + 1))
+    tag = "".join(
+        f'<text x="{tx}" y="{236 + i * 34}" class="sans rise" font-size="26" fill="{C["cream"]}" '
+        f'opacity=".93" style="animation-delay:{1.2 + i * .1:.1f}s">{esc(t)}</text>'
+        for i, t in enumerate(p["tagline"]))
+    meta = "".join(
+        f'<text x="{tx}" y="{354 + i * 24}" class="mono rise" font-size="16" fill="{C["teal"]}" '
+        f'style="animation-delay:{1.5 + i * .05:.2f}s">{esc(t)}</text>' for i, t in enumerate(p["meta"]))
+
     body = f"""{panel(W, H)}
 <defs><clipPath id="ph"><circle cx="{cx}" cy="{cy}" r="{r}"/></clipPath>
-<clipPath id="card"><rect x="6" y="6" width="{W - 12}" height="{H - 12}" rx="16"/></clipPath>
-<clipPath id="nm"><rect x="{tx}" y="120" width="0" height="80">
-<animate attributeName="width" from="0" to="{name_w:.0f}" dur="1.1s" begin=".3s" fill="freeze" calcMode="discrete"
- values="{';'.join(str(int(name_w * k / 16)) for k in range(17))}" keyTimes="{';'.join(f'{k/16:.4f}' for k in range(17))}"/>
+<clipPath id="nm"><rect x="{tx}" y="120" width="0" height="90">
+<animate attributeName="width" dur="1.1s" begin=".3s" fill="freeze" calcMode="discrete" values="{vals}" keyTimes="{keys}"/>
 </rect></clipPath></defs>
-<g clip-path="url(#card)">{hills}{leaves(W, H)}</g>
-<circle cx="{cx}" cy="{cy}" r="{r + 18}" fill="none" stroke="{C['orange']}" stroke-width="2" stroke-dasharray="4 10" opacity=".8">
+<g clip-path="url(#card)">{hills(H)}{leaves(H)}</g>
+<circle cx="{cx}" cy="{cy}" r="{r + 20}" fill="none" stroke="{C['orange']}" stroke-width="2" stroke-dasharray="4 10" opacity=".8">
 <animateTransform attributeName="transform" type="rotate" from="0 {cx} {cy}" to="360 {cx} {cy}" dur="40s" repeatCount="indefinite"/></circle>
-<circle cx="{cx}" cy="{cy}" r="{r + 6}" fill="none" stroke="{C['teal']}" stroke-width="1.5" opacity=".6"/>
+<circle cx="{cx}" cy="{cy}" r="{r + 7}" fill="none" stroke="{C['teal']}" stroke-width="1.5" opacity=".6"/>
 <g class="fade"><image href="data:image/jpeg;base64,{img}" xlink:href="data:image/jpeg;base64,{img}" x="{cx - r}" y="{cy - r}" width="{2 * r}" height="{2 * r}" clip-path="url(#ph)"/></g>
-<g class="fade" style="animation-delay:.6s"><circle cx="{cx + 106}" cy="{cy + 106}" r="13" fill="{C['bg']}"/>
-<circle cx="{cx + 106}" cy="{cy + 106}" r="8" fill="{C['green']}" style="animation:pulse 2s infinite"/></g>
-<text x="{cx}" y="{H - 32}" text-anchor="middle" class="mono fade" font-size="13" fill="{C['muted']}" letter-spacing="2" style="animation-delay:.8s">{esc(p['location'].upper())}</text>
-<text x="{tx}" y="104" class="mono fade" font-size="16" fill="{C['orange']}">{esc(p['greeting'])}</text>
-<g clip-path="url(#nm)"><text x="{tx}" y="176" class="sans" font-size="58" font-weight="700" fill="{C['cream']}">{esc(p['name'])}</text></g>
-<rect x="{tx + name_w + 4:.0f}" y="132" width="4" height="50" fill="{C['orange']}" style="animation:blink 1s steps(1) infinite"/>
-<text x="{tx}" y="226" class="sans rise" font-size="22" fill="{C['cream']}" opacity=".92" style="animation-delay:1.2s">{esc(p['tagline'][0])}</text>
-<text x="{tx}" y="256" class="sans rise" font-size="22" fill="{C['cream']}" opacity=".92" style="animation-delay:1.3s">{esc(p['tagline'][1])}</text>
-<text x="{tx}" y="302" class="mono rise" font-size="13.5" fill="{C['teal']}" style="animation-delay:1.45s">{esc(p['meta'])}</text>
-{''.join(chips)}"""
+<g class="fade" style="animation-delay:.6s"><circle cx="{cx + 120}" cy="{cy + 120}" r="15" fill="{C['bg']}"/>
+<circle cx="{cx + 120}" cy="{cy + 120}" r="9" fill="{C['green']}" style="animation:pulse 2s infinite"/></g>
+<text x="{cx}" y="{cy + r + 54}" text-anchor="middle" class="mono fade" font-size="16" fill="{C['muted']}" letter-spacing="3" style="animation-delay:.8s">{esc(p['location'].upper())}</text>
+<text x="{tx}" y="106" class="mono fade" font-size="19" fill="{C['orange']}">{esc(p['greeting'])}</text>
+<g clip-path="url(#nm)"><text x="{tx}" y="184" class="sans" font-size="66" font-weight="700" fill="{C['cream']}">{esc(p['name'])}</text></g>
+<rect x="{tx + name_w + 4:.0f}" y="134" width="5" height="56" fill="{C['orange']}" style="animation:blink 1s steps(1) infinite"/>
+{tag}{meta}{''.join(chips)}"""
     return svg(W, H, body, title=f"{p['name']}. {' '.join(p['tagline'])}")
 
 
 def heatmap(days) -> str:
-    W, H = 1200, 270
+    W, H = 1200, 300
     weeks: dict[int, list] = defaultdict(list)
     start = days[0][0] - dt.timedelta(days=(days[0][0].weekday() + 1) % 7)  # Sunday-aligned
     for d, n, lv in days:
         weeks[(d - start).days // 7].append((d, n, lv))
-    gx, gy, step, cell = 76, 66, 20.4, 16
+    gx, gy, step, cell = 80, 84, 20.2, 16
     cells, months, last_m = [], [], None
     for wi in sorted(weeks):
         for d, n, lv in weeks[wi]:
@@ -262,29 +327,30 @@ def heatmap(days) -> str:
                          f'<title>{n} on {d.isoformat()}</title></rect>')
         first = weeks[wi][0][0]
         if first.month != last_m and first.day <= 7:
-            months.append(f'<text x="{gx + wi * step:.1f}" y="{gy - 10}" class="mono" font-size="12" '
+            months.append(f'<text x="{gx + wi * step:.1f}" y="{gy - 12}" class="mono" font-size="15" '
                           f'fill="{C["muted"]}">{first.strftime("%b")}</text>')
             last_m = first.month
-    labels = "".join(f'<text x="{gx - 12}" y="{gy + r * step + 12.5:.1f}" text-anchor="end" class="mono" '
-                     f'font-size="11" fill="{C["dim"]}">{t}</text>'
+    labels = "".join(f'<text x="{gx - 12}" y="{gy + r * step + 13:.1f}" text-anchor="end" class="mono" '
+                     f'font-size="14" fill="{C["dim"]}">{t}</text>'
                      for r, t in ((1, "Mon"), (3, "Wed"), (5, "Fri")))
     total = sum(n for _, n, _ in days)
-    lx = W - 40 - 5 * 20 - 76
-    legend = (f'<text x="{lx}" y="{H - 26}" class="mono" font-size="11" fill="{C["dim"]}">less</text>'
-              + "".join(f'<rect x="{lx + 36 + i * 20}" y="{H - 38}" width="14" height="14" rx="3" fill="{c}"/>'
+    lx = W - 40 - 5 * 22 - 90
+    ly = H - 34
+    legend = (f'<text x="{lx}" y="{ly + 13}" class="mono" font-size="14" fill="{C["dim"]}">less</text>'
+              + "".join(f'<rect x="{lx + 44 + i * 22}" y="{ly}" width="16" height="16" rx="4" fill="{c}"/>'
                         for i, c in enumerate(LEVELS))
-              + f'<text x="{lx + 36 + 5 * 20 + 4}" y="{H - 26}" class="mono" font-size="11" fill="{C["dim"]}">more</text>')
+              + f'<text x="{lx + 44 + 5 * 22 + 4}" y="{ly + 13}" class="mono" font-size="14" fill="{C["dim"]}">more</text>')
     body = f"""{panel(W, H)}
-<text x="40" y="40" class="mono" font-size="13" fill="{C['orange']}">$ git log --since="1 year ago"</text>
-<text x="{W - 40}" y="40" text-anchor="end" class="sans" font-size="15" fill="{C['cream']}"><tspan font-weight="700">{total:,}</tspan> contributions in the last year</text>
+{prompt(40, 46, '$ git log --since="1 year ago"')}
+<text x="{W - 40}" y="46" text-anchor="end" class="sans" font-size="19" fill="{C['cream']}"><tspan font-weight="700" fill="{C['orange']}">{total:,}</tspan> contributions in the last year</text>
 {''.join(months)}{labels}{''.join(cells)}
-<text x="40" y="{H - 26}" class="mono" font-size="11" fill="{C['dim']}">refreshed {dt.date.today().isoformat()}</text>
+<text x="40" y="{ly + 13}" class="mono" font-size="14" fill="{C['dim']}">refreshed {dt.date.today().isoformat()}</text>
 {legend}"""
     return svg(W, H, body, title=f"{total} contributions in the last year")
 
 
 def activity(days) -> str:
-    W, H = 1200, 300
+    W, H = 1200, 340
     today = dt.date.today()
     past = [x for x in days if x[0] <= today]
     by_month: dict[tuple, int] = defaultdict(int)
@@ -299,7 +365,6 @@ def activity(days) -> str:
     vals = [by_month[k] for k in months]
     vmax = max(vals) or 1
 
-    # streaks
     longest = cur = 0
     for _, n, _ in past:
         cur = cur + 1 if n else 0
@@ -318,7 +383,7 @@ def activity(days) -> str:
         wd[d.strftime("%A")] += n
     top_wd = max(wd, key=wd.get) if wd else "-"
 
-    bx, by, bh, bw, gap = 50, 70, 160, 40, 18
+    bx, by, bh, bw, gap = 50, 100, 166, 40, 18
     bars = []
     for i, ((yy, mm), v) in enumerate(zip(months, vals)):
         h = max(3, v / vmax * bh)
@@ -328,27 +393,28 @@ def activity(days) -> str:
             f'<rect x="{x}" y="{by + bh - h:.1f}" width="{bw}" height="{h:.1f}" rx="6" fill="{col}" '
             f'style="transform-box:fill-box;transform-origin:bottom;animation:grow .9s cubic-bezier(.2,.8,.2,1) both;'
             f'animation-delay:{i * .07:.2f}s"/>'
-            f'<text x="{x + bw / 2}" y="{by + bh - h - 8:.1f}" text-anchor="middle" class="mono fade" font-size="12" '
+            f'<text x="{x + bw / 2}" y="{by + bh - h - 9:.1f}" text-anchor="middle" class="mono fade" font-size="15" '
             f'fill="{C["cream"]}" style="animation-delay:{.6 + i * .07:.2f}s">{v}</text>'
-            f'<text x="{x + bw / 2}" y="{by + bh + 22}" text-anchor="middle" class="mono" font-size="12" '
+            f'<text x="{x + bw / 2}" y="{by + bh + 28}" text-anchor="middle" class="mono" font-size="15" '
             f'fill="{C["muted"]}">{dt.date(yy, mm, 1).strftime("%b")}</text>')
 
-    stats = [("current streak", f"{current} d"), ("longest streak", f"{longest} d"),
-             ("busiest day", f"{best[1]}"), ("favourite weekday", top_wd)]
-    subs = ["", "", best[0].strftime("%d %b %Y"), ""]
+    stats = [("current streak", f"{current} d", ""), ("longest streak", f"{longest} d", ""),
+             ("busiest day", f"{best[1]}", best[0].strftime("%d %b %Y")),
+             ("top weekday", top_wd, "")]
     tiles = []
-    sx, sy, sw, sh = 770, 56, 190, 92
-    for i, ((k, v), sub) in enumerate(zip(stats, subs)):
+    sx, sy, sw, sh = 772, 66, 188, 112
+    for i, (k, v, sub) in enumerate(stats):
         x, y = sx + (i % 2) * (sw + 14), sy + (i // 2) * (sh + 14)
+        vs = 36 if len(v) <= 6 else 28
         tiles.append(
             f'<g class="rise" style="animation-delay:{.3 + i * .12:.2f}s">'
             f'<rect x="{x}" y="{y}" width="{sw}" height="{sh}" rx="12" fill="{C["bg"]}" stroke="{C["line"]}"/>'
-            f'<text x="{x + 16}" y="{y + 28}" class="mono" font-size="11.5" fill="{C["muted"]}">{esc(k)}</text>'
-            f'<text x="{x + 16}" y="{y + 64}" class="sans" font-size="{30 if len(v) < 7 else 24}" font-weight="700" '
+            f'<text x="{x + 18}" y="{y + 32}" class="mono" font-size="15" fill="{C["muted"]}">{esc(k)}</text>'
+            f'<text x="{x + 18}" y="{y + 76}" class="sans" font-size="{vs}" font-weight="700" '
             f'fill="{C["orange"] if i == 0 else C["cream"]}">{esc(v)}</text>'
-            f'<text x="{x + sw - 14}" y="{y + 28}" text-anchor="end" class="mono" font-size="11" fill="{C["dim"]}">{esc(sub)}</text></g>')
+            f'<text x="{x + 18}" y="{y + 100}" class="mono" font-size="13" fill="{C["dim"]}">{esc(sub)}</text></g>')
     body = f"""{panel(W, H)}
-<text x="40" y="40" class="mono" font-size="13" fill="{C['orange']}">$ contributions --by month</text>
+{prompt(40, 46, '$ contributions --by month')}
 <line x1="{bx - 8}" y1="{by + bh + 0.5}" x2="{bx + 12 * (bw + gap) - gap + 8}" y2="{by + bh + 0.5}" stroke="{C['line']}"/>
 {''.join(bars)}{''.join(tiles)}"""
     return svg(W, H, body, title=f"Monthly contributions; current streak {current} days, longest {longest} days")
@@ -360,7 +426,7 @@ def tile_viz(kind: str, x: int, y: int) -> str:
         fut = [(96, 22), (112, 14), (128, 10), (144, 6)]
         p = " ".join(f"{x + a},{y + b}" for a, b in pts)
         f = " ".join(f"{x + a},{y + b}" for a, b in fut)
-        band = (f"M{x + 96},{y + 22} L{x + 144},{y - 8} L{x + 144},{y + 20} Z")
+        band = f"M{x + 96},{y + 22} L{x + 144},{y - 8} L{x + 144},{y + 20} Z"
         return (f'<path d="{band}" fill="{C["orange"]}" opacity=".15" class="fade" style="animation-delay:1.4s"/>'
                 f'<polyline points="{p}" fill="none" stroke="{C["teal"]}" stroke-width="2.5" stroke-linecap="round" '
                 f'stroke-dasharray="200" stroke-dashoffset="200" style="animation:draw 1.2s ease-out .3s forwards"/>'
@@ -379,11 +445,10 @@ def tile_viz(kind: str, x: int, y: int) -> str:
                        f'style="animation:draw .8s ease-out {.3 + i * .35:.2f}s forwards"/>')
         for k, (cx, cy) in n.items():
             col = C["teal"] if k != "Z" else C["dim"]
-            out.append(f'<circle cx="{cx}" cy="{cy}" r="11" fill="{C["bg"]}" stroke="{col}" stroke-width="2"/>'
-                       f'<text x="{cx}" y="{cy + 4}" text-anchor="middle" class="mono" font-size="11" '
+            out.append(f'<circle cx="{cx}" cy="{cy}" r="13" fill="{C["bg"]}" stroke="{col}" stroke-width="2"/>'
+                       f'<text x="{cx}" y="{cy + 5}" text-anchor="middle" class="mono" font-size="13" '
                        f'fill="{C["cream"]}">{k}</text>')
         return "".join(out)
-    # bars: manual effort shrinking
     out = []
     for i, h in enumerate([44, 40, 34, 30, 27, 26]):
         col = C["orange"] if i == 5 else C["teal"]
@@ -394,63 +459,178 @@ def tile_viz(kind: str, x: int, y: int) -> str:
 
 
 def stat_tile(t: dict) -> str:
-    W, H = 400, 250
+    W, H = 400, 280
     body = f"""{panel(W, H)}
-<text x="30" y="44" class="mono" font-size="13" font-weight="700" fill="{C['orange']}" letter-spacing="2">{esc(t['label'])}</text>
-<g transform="translate(0,0)">{tile_viz(t['viz'], 220, 36)}</g>
-<text x="30" y="128" class="sans rise" font-size="60" font-weight="800" fill="{C['cream']}">{esc(t['value'])}</text>
-<text x="30" y="160" class="sans" font-size="15" fill="{C['cream']}" opacity=".9">{esc(t['line1'])}</text>
-<text x="30" y="182" class="sans" font-size="14" fill="{C['muted']}">{esc(t['line2'])}</text>
-<line x1="30" y1="202" x2="{W - 30}" y2="202" stroke="{C['line']}"/>
-<text x="30" y="224" class="mono" font-size="11.5" fill="{C['teal']}">{esc(t['foot'])}</text>"""
+<text x="30" y="50" class="mono" font-size="16" font-weight="700" fill="{C['orange']}" letter-spacing="2">{esc(t['label'])}</text>
+{tile_viz(t['viz'], 216, 40)}
+<text x="30" y="144" class="sans rise" font-size="66" font-weight="800" fill="{C['cream']}">{esc(t['value'])}</text>
+<text x="30" y="180" class="sans" font-size="19" fill="{C['cream']}" opacity=".92">{esc(t['line1'])}</text>
+<text x="30" y="206" class="sans" font-size="17" fill="{C['muted']}">{esc(t['line2'])}</text>
+<line x1="30" y1="226" x2="{W - 30}" y2="226" stroke="{C['line']}"/>
+<text x="30" y="254" class="mono" font-size="15" fill="{C['teal']}">{esc(t['foot'])}</text>"""
     return svg(W, H, body, title=f"{t['label']}: {t['value']} {t['line1']}")
 
 
-def title_card(text: str, dark: bool) -> str:
-    W, H = 1200, 96
+def title_card(cmd: str, text: str, dark: bool) -> str:
+    W, H = 1200, 112
     fg = C["cream"] if dark else C["bg"]
     sub = C["muted"] if dark else "#5a6b85"
-    tw = text_w(text, 30, bold=True)
-    body = f"""<text x="12" y="40" class="mono" font-size="14" fill="{C['orange']}">~/projects $ ls --active</text>
-<text x="12" y="78" class="sans" font-size="30" font-weight="700" fill="{fg}">{esc(text)}</text>
-<line x1="{tw + 32:.0f}" y1="68" x2="{W - 12}" y2="68" stroke="{sub}" stroke-opacity=".35" stroke-dasharray="1100" stroke-dashoffset="1100" style="animation:draw 1.4s ease-out .2s forwards"/>"""
+    tw = text_w(text, 38, bold=True)
+    body = f"""{prompt(12, 44, cmd, 18)}
+<text x="12" y="94" class="sans" font-size="38" font-weight="700" fill="{fg}">{esc(text)}</text>
+<line x1="{tw + 36:.0f}" y1="82" x2="{W - 12}" y2="82" stroke="{sub}" stroke-opacity=".35" stroke-dasharray="1100" stroke-dashoffset="1100" style="animation:draw 1.4s ease-out .2s forwards"/>"""
     return svg(W, H, body, title=text)
 
 
 def repo_card(spec: dict, info: dict) -> str:
-    W, H = 400, 250
-    lines = wrap(info["desc"], 48)[:4]
+    W, H = 400, 300
+    lines = wrap(info["desc"], 36)[:5]
     lang = info["lang"]
     name = spec["name"]
-    size = 22 if len(name) <= 22 else 19
+    size = 26 if len(name) <= 16 else 21
     badge = ""
     if spec.get("badge"):
-        bw = text_w(spec["badge"], 11, mono=True) + 30
-        badge = (f'<rect x="{W - 30 - bw:.0f}" y="26" width="{bw:.0f}" height="24" rx="12" fill="{C["orange"]}" fill-opacity=".14" '
+        bw = text_w(spec["badge"], 13, mono=True) + 34
+        bx = W - 30 - bw
+        badge = (f'<rect x="{bx:.0f}" y="26" width="{bw:.0f}" height="28" rx="14" fill="{C["orange"]}" fill-opacity=".14" '
                  f'stroke="{C["orange"]}" stroke-opacity=".6"/>'
-                 f'<circle cx="{W - 30 - bw + 13:.0f}" cy="38" r="4" fill="{C["orange"]}" style="animation:pulse 1.4s infinite"/>'
-                 f'<text x="{W - 30 - bw + 23:.0f}" y="42" class="mono" font-size="11" fill="{C["orange"]}">{esc(spec["badge"])}</text>')
-    desc = "".join(f'<text x="30" y="{100 + i * 22}" class="sans" font-size="14.5" fill="{C["muted"]}">{esc(l)}</text>'
+                 f'<circle cx="{bx + 15:.0f}" cy="40" r="5" fill="{C["orange"]}" style="animation:pulse 1.4s infinite"/>'
+                 f'<text x="{bx + 26:.0f}" y="45" class="mono" font-size="13" fill="{C["orange"]}">{esc(spec["badge"])}</text>')
+    desc = "".join(f'<text x="30" y="{122 + i * 25}" class="sans" font-size="17" fill="{C["muted"]}">{esc(l)}</text>'
                    for i, l in enumerate(lines))
     body = f"""{panel(W, H)}
-<path d="M30,32 h10 l4,4 h12 v16 h-26 z" fill="none" stroke="{C['teal']}" stroke-width="1.6"/>
+<path d="M30,30 h12 l5,5 h14 v19 h-31 z" fill="none" stroke="{C['teal']}" stroke-width="1.8"/>
 {badge}
-<text x="30" y="80" class="sans" font-size="{size}" font-weight="700" fill="{C['cream']}">{esc(name)}</text>
+<text x="30" y="92" class="sans" font-size="{size}" font-weight="700" fill="{C['cream']}">{esc(name)}</text>
 <g class="fade" style="animation-delay:.2s">{desc}</g>
-<line x1="30" y1="198" x2="{W - 30}" y2="198" stroke="{C['line']}"/>
-<circle cx="36" cy="221" r="6" fill="{LANG_COLORS.get(lang, C['teal'])}"/>
-<text x="50" y="226" class="mono" font-size="12.5" fill="{C['cream']}">{esc(lang)}</text>
-<text x="{W - 30}" y="226" text-anchor="end" class="mono" font-size="12.5" fill="{C['muted']}">★ {info['stars']}  ·  forks {info['forks']}</text>"""
+<line x1="30" y1="246" x2="{W - 30}" y2="246" stroke="{C['line']}"/>
+<circle cx="37" cy="270" r="7" fill="{LANG_COLORS.get(lang, C['teal'])}"/>
+<text x="53" y="276" class="mono" font-size="15" fill="{C['cream']}">{esc(lang)}</text>
+<text x="{W - 30}" y="276" text-anchor="end" class="mono" font-size="15" fill="{C['muted']}">★ {info['stars']}  ·  forks {info['forks']}</text>"""
     return svg(W, H, body, title=f"{name}: {info['desc']}")
+
+
+def journey() -> str:
+    W = 1200
+    top, row = 104, 104
+    H = top + row * len(JOURNEY) - 6
+    lx = 262
+    rows = []
+    for i, e in enumerate(JOURNEY):
+        y = top + i * row
+        d = .2 + i * .18
+        dot = (f'<circle cx="{lx}" cy="{y - 7}" r="9" fill="{C["bg"]}" stroke="{C["orange"] if e.get("live") else C["teal"]}" stroke-width="3"/>')
+        if e.get("live"):
+            dot += (f'<circle cx="{lx}" cy="{y - 7}" r="9" fill="none" stroke="{C["orange"]}" stroke-width="2">'
+                    f'<animate attributeName="r" values="9;20" dur="1.8s" repeatCount="indefinite"/>'
+                    f'<animate attributeName="opacity" values=".8;0" dur="1.8s" repeatCount="indefinite"/></circle>')
+        rows.append(
+            f'<g class="rise" style="animation-delay:{d:.2f}s">'
+            f'<text x="{lx - 34}" y="{y}" text-anchor="end" class="mono" font-size="18" font-weight="700" '
+            f'fill="{C["orange"] if e.get("live") else C["teal"]}">{esc(e["when"])}</text>{dot}'
+            f'<text x="{lx + 34}" y="{y}" class="sans" font-size="23" font-weight="700" fill="{C["cream"]}">{esc(e["title"])}</text>'
+            f'<text x="{lx + 34}" y="{y + 28}" class="sans" font-size="17" fill="{C["muted"]}">{esc(e["org"])}</text>'
+            f'<text x="{lx + 34}" y="{y + 56}" class="sans" font-size="17" fill="{C["teal"]}">{esc(e["detail"])}</text></g>')
+    body = f"""{panel(W, H)}
+{prompt(40, 46, '$ git log --oneline career')}
+<line x1="{lx}" y1="{top - 10}" x2="{lx}" y2="{top + row * (len(JOURNEY) - 1)}" stroke="{C['line']}" stroke-width="3"
+ stroke-dasharray="600" stroke-dashoffset="600" style="animation:draw 1.4s ease-out forwards"/>
+{''.join(rows)}"""
+    return svg(W, H, body, title="Journey: " + "; ".join(f"{e['when']} {e['title']}" for e in JOURNEY))
+
+
+def toolbox() -> str:
+    W = 1200
+    top, step = 80, 56
+    rows_n = len(TOOLBOX) + 1
+    H = top + rows_n * step + 20
+    out, k = [], 0
+    for i, (label, items) in enumerate(TOOLBOX):
+        y = top + i * step
+        out.append(f'<text x="40" y="{y + 24}" class="mono" font-size="15" font-weight="700" fill="{C["orange"]}" '
+                   f'letter-spacing="2">{esc(label)}</text>')
+        x = 250
+        for s in items:
+            c, cw = chip(x, y, s, 17, .15 + k * .04, 38)
+            out.append(c)
+            x += cw + 10
+            k += 1
+    y = top + len(TOOLBOX) * step
+    out.append(f'<text x="40" y="{y + 24}" class="mono" font-size="15" font-weight="700" fill="{C["orange"]}" '
+               f'letter-spacing="2">SPEAKS</text>')
+    x = 250
+    for lang, lvl, dots in SPOKEN:
+        out.append(f'<text x="{x}" y="{y + 25}" class="sans" font-size="19" fill="{C["cream"]}">{esc(lang)} '
+                   f'<tspan class="mono" font-size="15" fill="{C["muted"]}">{esc(lvl)}</tspan></text>')
+        dx = x + text_w(lang, 19) + 50
+        for j in range(5):
+            fill = C["teal"] if j + 1 <= dots else (f"url(#half)" if j < dots else C["line"])
+            out.append(f'<circle cx="{dx + j * 22:.0f}" cy="{y + 18}" r="7" fill="{fill}"/>')
+        x = int(dx + 5 * 22 + 50)
+    defs = (f'<defs><linearGradient id="half"><stop offset=".5" stop-color="{C["teal"]}"/>'
+            f'<stop offset=".5" stop-color="{C["line"]}"/></linearGradient></defs>')
+    body = f"""{panel(W, H)}{defs}
+{prompt(40, 46, '$ cat requirements.txt')}
+{''.join(out)}"""
+    return svg(W, H, body, title="Toolbox: " + ", ".join(s for _, items in TOOLBOX for s in items))
+
+
+def icon(kind: str, x: int, y: int) -> str:
+    s = f'fill="none" stroke="{C["teal"]}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"'
+    if kind == "globe":
+        return (f'<circle cx="{x + 20}" cy="{y + 20}" r="17" {s}/><ellipse cx="{x + 20}" cy="{y + 20}" rx="7" ry="17" {s}/>'
+                f'<path d="M{x + 3},{y + 20} h34 M{x + 6},{y + 11} h28 M{x + 6},{y + 29} h28" {s}/>')
+    if kind == "in":
+        return (f'<rect x="{x + 2}" y="{y + 2}" width="36" height="36" rx="7" {s}/>'
+                f'<text x="{x + 20}" y="{y + 28}" text-anchor="middle" class="sans" font-size="19" font-weight="800" '
+                f'fill="{C["teal"]}">in</text>')
+    if kind == "mail":
+        return (f'<rect x="{x + 1}" y="{y + 7}" width="38" height="27" rx="4" {s}/>'
+                f'<path d="M{x + 2},{y + 9} L{x + 20},{y + 23} L{x + 38},{y + 9}" {s}/>')
+    return (f'<path d="M{x + 7},{y + 1} h18 l9,9 v29 h-27 z M{x + 25},{y + 1} v9 h9" {s}/>'
+            f'<path d="M{x + 13},{y + 20} h14 M{x + 13},{y + 27} h14 M{x + 13},{y + 34} h9" {s}/>')
+
+
+def connect_card(c: dict, i: int) -> str:
+    W, H = 300, 190
+    body = f"""{panel(W, H)}
+{icon(c['icon'], 28, 28)}
+<g style="animation:nudge 2.4s ease-in-out {i * .3:.1f}s infinite">
+<path d="M{W - 50},{58} L{W - 30},{38} M{W - 44},{38} h14 v14" fill="none" stroke="{C['orange']}" stroke-width="2.6" stroke-linecap="round"/></g>
+<text x="28" y="104" class="mono" font-size="14" font-weight="700" fill="{C['orange']}" letter-spacing="2">{esc(c['label'])}</text>
+<text x="28" y="138" class="sans" font-size="27" font-weight="700" fill="{C['cream']}">{esc(c['title'])}</text>
+<text x="28" y="166" class="mono" font-size="{15 if len(c['sub']) <= 22 else 13.5}" fill="{C['muted']}">{esc(c['sub'])}</text>"""
+    return svg(W, H, body, title=f"{c['title']}: {c['sub']}")
+
+
+def footer() -> str:
+    W, H = 1200, 230
+    cx, cy = 150, 128
+    steam = "".join(
+        f'<path d="M{cx - 16 + j * 16},{cy - 32} q-8,-10 0,-20 q8,-10 0,-20" fill="none" stroke="{C["cream"]}" '
+        f'stroke-width="2.4" stroke-linecap="round" style="animation:steam 2.6s ease-out {j * .6:.1f}s infinite"/>'
+        for j in range(3))
+    cup = (f'<path d="M{cx - 40},{cy - 22} h80 v34 a40,32 0 0 1 -80,0 z" fill="{C["cream"]}"/>'
+           f'<path d="M{cx + 40},{cy - 12} a16,15 0 0 1 0,30" fill="none" stroke="{C["cream"]}" stroke-width="7"/>'
+           f'<ellipse cx="{cx}" cy="{cy - 22}" rx="40" ry="7" fill="#b07a4f"/>'
+           f'<path d="M{cx - 9},{cy - 23} q9,-6 18,0 q-9,4 -18,0" fill="{C["cream"]}" opacity=".85"/>'
+           f'<ellipse cx="{cx}" cy="{cy + 44}" rx="62" ry="8" fill="{C["cream"]}" opacity=".18"/>')
+    body = f"""{panel(W, H)}
+<g clip-path="url(#card)">{hills(H)}{leaves(H, (400, 560, 720, 880, 1030, 1140))}</g>
+{steam}{cup}
+<text x="270" y="104" class="sans rise" font-size="36" font-weight="700" fill="{C['cream']}">Danke fürs Vorbeischauen.</text>
+<text x="270" y="140" class="mono rise" font-size="19" fill="{C['muted']}" style="animation-delay:.2s">thanks for stopping by · these cards redraw themselves daily</text>"""
+    return svg(W, H, body, title="Danke fürs Vorbeischauen. Thanks for stopping by.")
 
 
 # -------------------------------------------------------------------- main --
 
 def main() -> None:
     CARDS.mkdir(exist_ok=True)
-    out = {"hero.svg": hero(),
-           "title-building-dark.svg": title_card("What I'm building", True),
-           "title-building-light.svg": title_card("What I'm building", False)}
+    out = {"hero.svg": hero(), "journey.svg": journey(), "toolbox.svg": toolbox(), "footer.svg": footer()}
+    for key, (cmd, text) in TITLES.items():
+        out[f"title-{key}-dark.svg"] = title_card(cmd, text, True)
+        out[f"title-{key}-light.svg"] = title_card(cmd, text, False)
     try:
         days = fetch_contributions()
         out["heatmap.svg"] = heatmap(days)
@@ -461,6 +641,8 @@ def main() -> None:
         out[f"{t['file']}.svg"] = stat_tile(t)
     for spec in REPOS:
         out[f"repo-{spec['name'].lower()}.svg"] = repo_card(spec, fetch_repo(spec))
+    for i, c in enumerate(CONNECT):
+        out[f"connect-{c['file']}.svg"] = connect_card(c, i)
     for name, content in out.items():
         (CARDS / name).write_text(content, encoding="utf-8")
         print(f"wrote cards/{name} ({len(content) / 1024:.1f} KB)")

@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/main.yml"
 
 jobs:
   generate:
@@ -20,6 +24,7 @@ jobs:
           outputs: |
             dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
+            dist/snake-rhine.svg?color_snake=#f0803c&color_dots=#1a2945,#2c5c63,#4f9c93,#e3a24f,#f2733a&color_dot_border=#0e1a2f
 
       - name: Publish snake SVGs
         uses: crazy-max/ghaction-github-pages@v4
