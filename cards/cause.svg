@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="250" viewBox="0 0 400 250" role="img" aria-label="CAUSE: 5 policy datasets stress-tested"><title>CAUSE: 5 policy datasets stress-tested</title><style>
+.sans{font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif} .mono{font-family:'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes blink{50%{opacity:0}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.fade{animation:fade .8s ease-out both}
+.rise{animation:rise .8s ease-out both}
+</style><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15243e"/><stop offset="1" stop-color="#0e1a2f"/></linearGradient></defs><rect x="6" y="6" width="388" height="238" rx="16" fill="url(#pg)" stroke="#24365a"/>
+<text x="30" y="44" class="mono" font-size="13" font-weight="700" fill="#f0803c" letter-spacing="2">CAUSE</text>
+<g transform="translate(0,0)"><line x1="292" y1="32" x2="236" y2="76" stroke="#5f7392" stroke-width="2" stroke-dasharray="140" stroke-dashoffset="140" style="animation:draw .8s ease-out 0.30s forwards"/><line x1="292" y1="32" x2="348" y2="76" stroke="#5f7392" stroke-width="2" stroke-dasharray="140" stroke-dashoffset="140" style="animation:draw .8s ease-out 0.65s forwards"/><line x1="236" y1="76" x2="348" y2="76" stroke="#f0803c" stroke-width="2" stroke-dasharray="140" stroke-dashoffset="140" style="animation:draw .8s ease-out 1.00s forwards"/><circle cx="292" cy="32" r="11" fill="#0e1a2f" stroke="#5f7392" stroke-width="2"/><text x="292" y="36" text-anchor="middle" class="mono" font-size="11" fill="#f3e9d2">Z</text><circle cx="236" cy="76" r="11" fill="#0e1a2f" stroke="#5fb3a6" stroke-width="2"/><text x="236" y="80" text-anchor="middle" class="mono" font-size="11" fill="#f3e9d2">T</text><circle cx="348" cy="76" r="11" fill="#0e1a2f" stroke="#5fb3a6" stroke-width="2"/><text x="348" y="80" text-anchor="middle" class="mono" font-size="11" fill="#f3e9d2">Y</text></g>
+<text x="30" y="128" class="sans rise" font-size="60" font-weight="800" fill="#f3e9d2">5</text>
+<text x="30" y="160" class="sans" font-size="15" fill="#f3e9d2" opacity=".9">policy datasets stress-tested</text>
+<text x="30" y="182" class="sans" font-size="14" fill="#9fb0c9">with IPW, AIPW, meta-learners</text>
+<line x1="30" y1="202" x2="370" y2="202" stroke="#24365a"/>
+<text x="30" y="224" class="mono" font-size="11.5" fill="#5fb3a6">Rosenbaum bounds · HTE</text></svg>
