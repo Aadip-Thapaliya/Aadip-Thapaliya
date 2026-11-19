@@ -14,6 +14,6 @@
 <path d="M35,29 h18 l9,9 v29 h-27 z M53,29 v9 h9" fill="none" stroke="#5fb3a6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M41,48 h14 M41,55 h14 M41,62 h9" fill="none" stroke="#5fb3a6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 <g style="animation:nudge 2.4s ease-in-out 0.9s infinite">
 <path d="M250,58 L270,38 M256,38 h14 v14" fill="none" stroke="#f0803c" stroke-width="2.6" stroke-linecap="round"/></g>
-<text x="28" y="104" class="mono" font-size="14" font-weight="700" fill="#f0803c" letter-spacing="2">RESUME</text>
-<text x="28" y="138" class="sans" font-size="27" font-weight="700" fill="#f3e9d2">Resume</text>
-<text x="28" y="166" class="mono" font-size="15" fill="#a9b8cf">Lebenslauf · PDF</text></svg>
+<text x="28" y="104" class="mono" font-size="16" font-weight="700" fill="#f0803c" letter-spacing="2">RESUME</text>
+<text x="28" y="140" class="sans" font-size="30" font-weight="700" fill="#f3e9d2">Resume</text>
+<text x="28" y="166" class="mono" font-size="18" fill="#a9b8cf">Lebenslauf · PDF</text></svg>

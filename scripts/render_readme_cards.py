@@ -90,9 +90,9 @@ TOOLBOX = [
 SPOKEN = [("English", "C1", 4.5), ("German", "A2", 2)]
 
 CONNECT = [
-    {"file": "portfolio", "label": "PORTFOLIO", "title": "Portfolio", "sub": "projects & case studies", "icon": "globe"},
+    {"file": "portfolio", "label": "PORTFOLIO", "title": "Portfolio", "sub": "projects & cases", "icon": "globe"},
     {"file": "linkedin", "label": "LINKEDIN", "title": "LinkedIn", "sub": "in/aadipthapaliya", "icon": "in"},
-    {"file": "email", "label": "EMAIL", "title": "Email", "sub": "aadipthapaliya@gmail.com", "icon": "mail"},
+    {"file": "email", "label": "EMAIL", "title": "Email", "sub": "drop me a line", "icon": "mail"},
     {"file": "resume", "label": "RESUME", "title": "Resume", "sub": "Lebenslauf · PDF", "icon": "doc"},
 ]
 
@@ -597,9 +597,9 @@ def connect_card(c: dict, i: int) -> str:
 {icon(c['icon'], 28, 28)}
 <g style="animation:nudge 2.4s ease-in-out {i * .3:.1f}s infinite">
 <path d="M{W - 50},{58} L{W - 30},{38} M{W - 44},{38} h14 v14" fill="none" stroke="{C['orange']}" stroke-width="2.6" stroke-linecap="round"/></g>
-<text x="28" y="104" class="mono" font-size="14" font-weight="700" fill="{C['orange']}" letter-spacing="2">{esc(c['label'])}</text>
-<text x="28" y="138" class="sans" font-size="27" font-weight="700" fill="{C['cream']}">{esc(c['title'])}</text>
-<text x="28" y="166" class="mono" font-size="{15 if len(c['sub']) <= 22 else 13.5}" fill="{C['muted']}">{esc(c['sub'])}</text>"""
+<text x="28" y="104" class="mono" font-size="16" font-weight="700" fill="{C['orange']}" letter-spacing="2">{esc(c['label'])}</text>
+<text x="28" y="140" class="sans" font-size="30" font-weight="700" fill="{C['cream']}">{esc(c['title'])}</text>
+<text x="28" y="166" class="mono" font-size="18" fill="{C['muted']}">{esc(c['sub'])}</text>"""
     return svg(W, H, body, title=f"{c['title']}: {c['sub']}")
 
 
